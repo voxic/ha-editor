@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+	<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="public/custom.css" rel="stylesheet">
+	<title>HA-Editor</title>
+</head>
+<body>
+
+<div class="container-fluid">
+	<div class="row" id="main">
+		<div class="col-md-8">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title" id="editorTitle"></h3>
+				</div>
+				<div class="panel-body" id="editor">
+					
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4">
+				<div class="list-group" id="fileList">
+				<span class="list-group-item active">
+					Files <span class="glyphicon glyphicon-refresh" aria-hidden="true" onclick="getFiles()"></span>
+				</span>
+				
+				</div>			
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-8">
+			<button type="button" class="btn btn-success" onclick="saveFile()">Save</button> <span id="saveStatus"></span>
+		</div>
+
+	</div>
+</div>
+
+<!-- Load external scripts -->
+<script src="jquery/jquery.min.js"></script>
+<script src="monaco/loader.js"></script>
+<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="public/main.js"></script>
+
+</body>
+</html>
