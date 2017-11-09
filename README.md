@@ -7,6 +7,9 @@ A web-based editor for homeassistant based on the Monaco editor.
 
 The editor is made to be run on the same system as homeassistant and presented as a panel inside of the webpage of homeassistant.
 
+Discussion at:
+https://community.home-assistant.io/t/web-based-editor/32051
+
 ![alt text](https://github.com/voxic/ha-editor/blob/master/haeditor.PNG)
 
 ### Prerequisites
