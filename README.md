@@ -14,7 +14,7 @@ As of now the editor is served with nodejs.
 
 ### Installing
 
-Make shure that you can run node and npm.
+Make sure that you can run node and npm.
 
 Clone this repo.
 
@@ -57,7 +57,7 @@ Enjoy!
 
 ## Built With
 
-* Monaco-edior
+* Monaco-editor
 * Bootstrap
 * Express
 * EJS
