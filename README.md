@@ -48,6 +48,7 @@ panel_iframe:
 
 Restart homeassistant and start the web-editor
 ```
+cd ha-editor
 node app.js
 ```
 
