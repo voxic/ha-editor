@@ -2,10 +2,10 @@ FROM node:boron
 # Create app directory
 WORKDIR /usr/src/app
 # Install app dependencies
-COPY ../package.json .
+COPY package.json .
 RUN npm install
 # Bundle app source
-COPY .. .
+COPY . .
 
 # Bind app port
 EXPOSE 3000
