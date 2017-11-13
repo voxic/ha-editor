@@ -1,12 +1,16 @@
 var editor;
 var currentFile;
 var currentFolder = "";
+let lastFolder = "";
+let breadcrumb = [];
 
 
 //Function to load contents from a file on the server to the editor
 function loadFile(fileName){
+    let data = {"path" : currentFolder + "/" + fileName}
     $("#saveStatus").text("");
-    $.get( "/file/"+fileName, function() {
+
+    $.post( "/file", data, function() {
     })
     .done(function(data) {
         $("#editorTitle").text(fileName);
@@ -64,19 +68,28 @@ function saveFile(){
 //Function to get a list of files from the server
 function getFiles(dirName){
     $('#fileList').find("a").remove();
-    if(dirName == null){ dirName = ""}
-    $.get( "/fileList/" + dirName, function() {
+    let data;
+
+    if(dirName == null){ 
+        data = {"path" : "home"};
+    }
+    else {
+        data = {"path" : dirName}
+    }
+
+    $.post( "/fileList", data, function() {
 
     })
     .done(function(data) {
-        console.log(data);
         currentFolder = data.currentFolder;
+
         $("#currentFolder").text(currentFolder);
+        $('#fileList').append("<a href='#' onclick='getFiles(\"home\")' class='list-group-item'><span class='glyphicon glyphicon-home' aria-hidden='true' style='margin-right: 5px'></span> Home</a>");
         if(data.length == 0){
             $('#fileList').append("<a>No files</a>");
         }else {
             $.each(data.folders, function (indexInArray, valueOfElement) { 
-                $('#fileList').append("<a href='#' onclick='getFiles(\""+valueOfElement+"\")' class='list-group-item'><span class='glyphicon glyphicon-folder-open' aria-hidden='true' style='margin-right: 5px'></span> "+ valueOfElement + "</a>");
+                $('#fileList').append("<a href='#' onclick='getFiles(\"" + currentFolder + "/" +valueOfElement+"\")' class='list-group-item'><span class='glyphicon glyphicon-folder-open' aria-hidden='true' style='margin-right: 5px'></span> "+ valueOfElement + "</a>");
             });
             $.each(data.files, function (indexInArray, valueOfElement) { 
                 $('#fileList').append("<a href='#' onclick='loadFile(\""+valueOfElement+"\")' class='list-group-item'><span class='glyphicon glyphicon-file' aria-hidden='true'></span> "+ valueOfElement + "</a>");
@@ -88,7 +101,6 @@ function getFiles(dirName){
         
     })
     .always(function(data, status, xhr) {
-        console.log(xhr.status);
     });
 }
 

@@ -8,24 +8,21 @@ let bodyParser = require('body-parser');
 
 //The root folder for homeassistant config files.
 let baseDir = "configFolder"
-let currentFolder = baseDir;
 
 
 //Function to load a file from disk and return it
-function getFile(fileName, fn){
-    fs.readFile(currentFolder + "/"+fileName, 'utf8', function(err, data) {  
+function getFile(filePath, fn){
+    fs.readFile(filePath, 'utf8', function(err, data) {  
         if (err) throw err;
         return fn(data);
     }); 
 }
 
 //Function to list files in a directory and return it as an array
-function getDir(root, fn){
-    console.log("browse dir: " + currentFolder);
-    fs.readdir(currentFolder, function(err,data){
+function getDir(dirPath, fn){
+    fs.readdir(dirPath, function(err,data){
         let tempFiles = [];
         let tempFolders = []
-        console.log(data);
         data.forEach(function(element) {
             //Check file type and only include known file types
             if(element.includes(".yaml")){
@@ -38,14 +35,14 @@ function getDir(root, fn){
                 tempFolders.push(element);
             } 
         }, this);
-        let filesDirs = {'folders': tempFolders, 'files': tempFiles, 'currentFolder' : currentFolder };
+        let filesDirs = {'folders': tempFolders, 'files': tempFiles, 'currentFolder' : dirPath };
         return fn(filesDirs);
     });
 }
 
 //Function to save the file to disk.
-function saveFile(fileName, data, fn){
-    fs.writeFile(currentFolder + "/" + fileName, data, (err) => {
+function saveFile(filePath, data, fn){
+    fs.writeFile(filePath, data, (err) => {
         if (err) throw err;
         return fn('The file has been saved!');
       });
@@ -72,21 +69,20 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/file/:fileName', (req, res) => {
-    getFile(req.params.fileName, (results)=>{
+app.post('/file', (req, res) => {
+    getFile(req.body.path, (results)=>{
         res.send(results);
     });
 });
 
-app.get('/fileList/:dirName?', (req, res) => {
-    console.log(req.params.dirName);
-    if(req.params.dirName == null){
+app.post('/fileList', (req, res) => {
+    if(req.body.path == "home"){
         getDir(baseDir, (results)=>{
             res.send(results);
         });
     }
     else {
-        getDir(req.params.dirName, (results)=>{
+        getDir(req.body.path, (results)=>{
             res.send(results);
         });
     }
