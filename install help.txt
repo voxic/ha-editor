@@ -2,4 +2,4 @@ Install docker, see https://www.raspberrypi.org/blog/docker-comes-to-raspberry-p
 
 sudo docker pull voxic/ha-editor
 
-sudo docker run -d -p 3000:3000 --mount type=bind,source="$(pwd)"/target,target=/usr/src/app/configFolder voxic/ha-editor
+sudo docker run -d -p 3000:3000 --mount type=bind,source="$(pwd)"/,target=/usr/src/app/configFolder voxic/ha-editor

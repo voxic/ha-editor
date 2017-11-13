@@ -49,7 +49,7 @@ function loadFile(fileName){
 
 //Function to save the contents from the editor to the server
 function saveFile(){
-    var data = {"fileName": currentFile, data: editor.getValue()};
+    var data = {"fileName": currentFolder + "/" + currentFile, data: editor.getValue()};
     $.post( "/saveFile", data, function() {
         
         })
@@ -112,7 +112,8 @@ $(function () {
             language: 'yaml'
         });
     });
-
+    
     getFiles();
+    console.log("current folder:" + currentFolder);
     
 });
