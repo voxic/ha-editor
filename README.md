@@ -22,10 +22,16 @@ As of now the editor is served with nodejs.
 #### Docker
 Install docker, for RaspberryPi see https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
 
+Fetch the docker image
+```
 sudo docker pull voxic/ha-editor
+```
 
+Go to the location of home assistant configuration and start the docker container.
+```
 cd /location_of_homeassistant_configfiles
 sudo docker run -d -p 3000:3000 --mount type=bind,source="$(pwd)"/,target=/usr/src/app/configFolder voxic/ha-editor
+```
 
 Edit configuration.yaml and add the following:
 
