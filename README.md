@@ -1,11 +1,11 @@
 # ha-editor
-A web-based editor for homeassistant based on the Monaco editor.
+A web-based editor for home assistant based on the Monaco editor.
 
 
 
 ## Getting Started
 
-The editor is made to be run on the same system as homeassistant and presented as a panel inside of the webpage of homeassistant.
+The editor is made to be run on the same system as home assistant and presented as a panel inside of the webpage of home assistant.
 
 Discussion at:
 https://community.home-assistant.io/t/web-based-editor/32051
@@ -19,6 +19,28 @@ As of now the editor is served with nodejs.
 
 ### Installing
 
+## Docker
+Install docker, for RaspberryPi see https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
+
+sudo docker pull voxic/ha-editor
+
+cd /location_of_homeassistant_configfiles
+sudo docker run -d -p 3000:3000 --mount type=bind,source="$(pwd)"/,target=/usr/src/app/configFolder voxic/ha-editor
+
+Edit configuration.yaml and add the following:
+
+```
+# Enable the editor panel
+panel_iframe:
+  editor:
+    title: 'Editor'
+    url: 'http://xxx.xxx.xxx.xxx:3000' #IP to your home assistant
+    icon: mdi:book-open
+```
+
+Restart Home assistant
+
+## Nodejs
 Make sure that you can run node and npm.
 
 Clone this repo.
@@ -34,7 +56,7 @@ cd ha-editor
 npm install
 ```
 
-Edit app.js and the variable ```baseDir``` to point to the folder where you homeassistant config files are located.
+Edit app.js and the variable ```baseDir``` to point to the folder where you home assistant config files are located.
 
 ```
 let baseDir = "configFolder"
@@ -47,11 +69,11 @@ Edit configuration.yaml and add the following:
 panel_iframe:
   editor:
     title: 'Editor'
-    url: 'http://xxx.xxx.xxx.xxx:3000' #IP to your homeassistant
+    url: 'http://xxx.xxx.xxx.xxx:3000' #IP to your home assistant
     icon: mdi:book-open
 ```
 
-Restart homeassistant and start the web-editor
+Restart home assistant and start the web-editor
 ```
 cd ha-editor
 node app.js
