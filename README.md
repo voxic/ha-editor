@@ -19,7 +19,7 @@ As of now the editor is served with nodejs.
 
 ### Installing
 
-## Docker
+#### Docker
 Install docker, for RaspberryPi see https://www.raspberrypi.org/blog/docker-comes-to-raspberry-pi/
 
 sudo docker pull voxic/ha-editor
@@ -40,7 +40,7 @@ panel_iframe:
 
 Restart Home assistant
 
-## Nodejs
+#### Nodejs
 Make sure that you can run node and npm.
 
 Clone this repo.
