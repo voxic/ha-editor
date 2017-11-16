@@ -111,9 +111,8 @@ $(function () {
             value: "Ready, choose file to edit.",
             language: 'yaml'
         });
-    });
-    
-    getFiles();
-    console.log("current folder:" + currentFolder);
-    
+        //Fetch files and dirs.
+        getFiles();
+     
+    });   
 });

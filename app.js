@@ -23,18 +23,20 @@ function getDir(dirPath, fn){
     fs.readdir(dirPath, function(err,data){
         let tempFiles = [];
         let tempFolders = []
-        data.forEach(function(element) {
-            //Check file type and only include known file types
-            if(element.includes(".yaml")){
-                tempFiles.push(element);
-            }
-            else if(element.includes(".py")){
-                tempFiles.push(element);
-            }
-            else if(!element.includes(".")){
-                tempFolders.push(element);
-            } 
-        }, this);
+        if(data != null){
+            data.forEach(function(element) {
+                //Check file type and only include known file types
+                if(element.includes(".yaml")){
+                    tempFiles.push(element);
+                }
+                else if(element.includes(".py")){
+                    tempFiles.push(element);
+                }
+                else if(!element.includes(".")){
+                    tempFolders.push(element);
+                } 
+            }, this);
+        }       
         let filesDirs = {'folders': tempFolders, 'files': tempFiles, 'currentFolder' : dirPath };
         return fn(filesDirs);
     });
