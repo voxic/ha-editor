@@ -1,4 +1,4 @@
-FROM node:boron
+FROM node:boron-alpine
 # Create app directory
 WORKDIR /usr/src/app
 # Install app dependencies
